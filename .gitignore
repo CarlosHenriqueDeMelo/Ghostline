@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Segredos
+.env
+*.pem
+*.key
+
+# Uploads e dados locais
+uploads/
+*.db
+*.sqlite3
+
+# Editor
+.vscode/
+.idea/
