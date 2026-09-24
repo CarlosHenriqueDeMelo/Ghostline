@@ -13,6 +13,7 @@ def enviar_para_todos(dados, remetente): # Enviar mensagem para todos os Cliente
 def atender_cliente(conn, addr): # Função, passei parâmetros, Conn = é o caminho por onde os dados passa para o cliente, Addr = O endereço dele (IP e Porta)
     print(f"Alguém conectou: {addr}") # Mostra na tela o IP e a porta do Cliente, quem guarda é o ADDR
     clientes.append(conn) # adiciona o conn do cliente ao fim da lista
+    enviar_para_todos(f"[aviso] {addr} entrou".encode("utf-8"), conn)
     while True:
         try:
             dados = conn.recv(1024) # Espera o Cliente mandar algo, e guarda, 1024 max bytes p/vez
@@ -25,6 +26,7 @@ def atender_cliente(conn, addr): # Função, passei parâmetros, Conn = é o cam
         enviar_para_todos(dados, conn) # Manda a mensagem para todos os outros clientes da lista
 
     clientes.remove(conn) # Tira este cliente da lista
+    enviar_para_todos(f"[aviso] {addr} saiu".encode("utf-8"), conn)
     conn.close() # Termina conexão com Cliente
     print(f"Conexão com {addr} encerrada") # Exibe IP/PORTA
     
