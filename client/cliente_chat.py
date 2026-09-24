@@ -20,5 +20,9 @@ thread.start()
 
 while True:
     mensagem = input("> ") # DIGITAR
+    if mensagem == "/sair":
+        break
     cliente.sendall(f"{nome}: {mensagem}".encode("utf-8")) # Converte a mensagem em bytes, e envia para o servidor 
-    
+
+
+cliente.close()
