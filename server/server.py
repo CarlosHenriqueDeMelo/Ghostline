@@ -8,19 +8,18 @@ servidor.bind((HOST, PORT))            # endereço e porta
 servidor.listen()
 print(f"Escutando em {HOST}:{PORT}")
 
-conn, addr = servidor.accept()
-print("Conectado:", addr)
-
 while True:
-    dados = conn.recv(1024)
-    if not dados:
-        break
-    print("Recebi:", dados)
-    conn.sendall(dados) # envia de volta os dados recebidos
+    conn, addr = servidor.accept() # aceita a conexão
+    print(f"Alguém conectou{addr}")
 
-print("Conexão encerrada")
-conn.close()
-servidor.close()
+    while True:
+        dados = conn.recv(1024)
+        if not dados:
+            break
+        texto = dados.decode("utf-8", errors="replace").strip()
+        print("Recebi:", texto)
+        conn.sendall(dados) # envia de volta os dados recebido
+    conn.close()
+    print(f"Conexão com {addr} encerrada")
 
-conn.close()
-servidor.close()
+    
