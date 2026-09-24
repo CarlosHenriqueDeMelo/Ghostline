@@ -6,6 +6,7 @@ PORT = 5000
 
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 cliente.connect((HOST, PORT))
+nome = input("Seu nome: ")
 
 def receber():
     while True:
@@ -19,5 +20,5 @@ thread.start()
 
 while True:
     mensagem = input("> ") # DIGITAR
-    cliente.sendall(mensagem.encode("utf-8")) # Converte a mensagem em bytes, e envia para o servidor
+    cliente.sendall(f"{nome}: {mensagem}".encode("utf-8")) # Converte a mensagem em bytes, e envia para o servidor 
     
